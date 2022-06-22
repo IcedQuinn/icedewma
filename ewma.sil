@@ -1,0 +1,58 @@
+\begin{document}
+\script[src=packages/math]
+
+\noindent
+Exponentially Weighted Moving Averages
+
+Variables are:
+
+- E the moving average over time
+- \math{\alpha} the quashing value
+- \math{\beta} the newly sampled data to be included in the average
+
+To integrate a new value \math{\beta} in to moving average \math{E}:
+
+\begin[mode=display]{math}
+E_t = \alpha \beta + (1-\alpha) E_{t-1}
+\end{math}
+
+\noindent Initial Value
+Setting the initial value of \math{E} is essentially \em{Bayesian Averaging}.
+If \math{\alpha} is configured to match an average over ten days then setting \math{E} to 500 is equivalent to having observed ten days of 500.
+
+\noindent Alphas
+
+An "N-Day" alpha, where \math{\beta} is taken once per day for \math{N} days can be computed as:
+
+\begin[mode=display]{math}
+\frac{2}{N+1}
+\end{math}
+
+It is also possible to tune \math{\alpha} with machine learning if you are trying to match the hysterisis of something in the real world.
+
+\noindent
+References
+
+https://corporatefinanceinstitute.com/resources/knowledge/trading-investing/exponentially-weighted-moving-average-ewma/
+
+\noindent
+Exponentially Weighted Standard Deviations
+
+To update the variance with a new data point:
+
+\begin[mode=display]{math}
+S_i = (1-a) (S_{i-1} + a(x_i - \mu_{i-1})^2)
+\end{math}
+
+This is a variance so the standard deviation is \math{\sqrt S_i}.
+
+\math{\mu} is the current weighted average according to EWMA so you will need to keep track of that as well.
+
+\noindent
+References
+
+https://stats.stackexchange.com/questions/111851/standard-deviation-of-an-exponentially-weighted-mean
+
+"Incremental calculation of weighted mean and variance." Tony Finch. https://web.archive.org/web/20181222175223/http://people.ds.cam.ac.uk/fanf2/hermes/doc/antiforgery/stats.pdf
+
+\end{document}
